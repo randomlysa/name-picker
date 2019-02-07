@@ -14,6 +14,8 @@ export default class Filters extends React.Component {
     e.preventDefault();
     let { min, max, letters } = this.state;
     // Query won't work without something for letters.
+    if (!min) min = 0;
+    if (!max) max = 10;
     if (letters.length === 0) letters = ['_____'];
 
     const results = axios.get(
