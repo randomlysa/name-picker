@@ -34,8 +34,8 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   });
 
   let sql = `SELECT name FROM names
-            WHERE LENGTH(name) > ${min}
-            AND LENGTH(name) < ${max}
+            WHERE LENGTH(name) >= ${min}
+            AND LENGTH(name) <= ${max}
             ${lettersQuery}
              LIMIT 10`;
 
