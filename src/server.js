@@ -33,7 +33,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
     console.log('Connected to the in-memory SQlite database.');
   });
 
-  let sql = `SELECT name FROM names
+  let sql = `SELECT name, id FROM names
             WHERE LENGTH(name) >= ${min}
             AND LENGTH(name) <= ${max}
             ${lettersQuery}
@@ -44,7 +44,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
       throw err;
     }
     rows.forEach(row => {
-      results.push(row.name);
+      results.push([row.name, row.id]);
     });
     res.send(results);
   });
