@@ -16,8 +16,13 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   if (!max) max = 15;
   console.log(min, max, letters);
   let lettersQuery = '';
-  if (letters[0] !== '_____') {
-    lettersQuery = "AND containsC = 'X'";
+  if (letters !== '_____') {
+    let lettersArray = letters.split('');
+    let buildQuery = [];
+    lettersArray.forEach(letter => {
+      buildQuery.push(`AND contains${letter} = 'X'`);
+    });
+    lettersQuery = buildQuery.join(' ');
   }
 
   let results = [];
