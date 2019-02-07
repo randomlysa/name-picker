@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import Filters from './filters';
+import Results from './results';
 
 class App extends React.Component {
   state = {
     min: 0,
     max: 10,
-    letters: []
+    letters: [],
+    results: []
   };
 
   handleChange = e => {
@@ -29,9 +31,7 @@ class App extends React.Component {
     );
     results.then(r => {
       console.log(r.data);
-      // r.data.forEach(name => {
-      //   console.log(name, name.length);
-      // });
+      this.setState({ results: r.data });
     });
   };
 
@@ -45,7 +45,7 @@ class App extends React.Component {
           max={this.state.max}
           letters={this.state.letters}
         />
-        React
+        <Results results={this.state.results} />
       </div>
     );
   }
