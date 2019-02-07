@@ -14,7 +14,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   let letters = req.params.letters;
   if (!min) min = 10;
   if (!max) max = 15;
-  console.log(min, max, letters);
+
   let lettersQuery = '';
   if (letters !== '_____') {
     let lettersArray = letters.split('');
