@@ -5,18 +5,15 @@ export default class Filters extends React.Component {
   state = {
     min: 0,
     max: 10,
-    letters: []
+    letters: ['a']
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const optionsObj = {
-      min: this.state.min,
-      max: this.state.max,
-      letters: this.state.letters
-    };
-    const options = JSON.stringify(optionsObj);
-    const results = axios.get(`http://localhost:3000/search/${options}`);
+    const { min, max, letters } = this.state;
+    const results = axios.get(
+      `http://localhost:3000/search/${min}/${max}/${letters}`
+    );
     results.then(r => console.log(r.data));
   };
 
