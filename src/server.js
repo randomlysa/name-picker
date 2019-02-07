@@ -10,7 +10,7 @@ const sqlite3 = require('sqlite3').verbose();
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/search/:min/:max/:letters', function(req, res) {
   let min = req.params.min;
-  let max = console.log(req.params.max);
+  let max = req.params.max;
   let letters = req.params.letters;
   if (!min) min = 10;
   if (!max) max = 15;
