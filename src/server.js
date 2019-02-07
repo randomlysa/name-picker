@@ -14,6 +14,11 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   let letters = req.params.letters;
   if (!min) min = 10;
   if (!max) max = 15;
+  console.log(min, max, letters);
+  let lettersQuery = '';
+  if (letters[0] !== '_____') {
+    lettersQuery = "AND containsC = 'X'";
+  }
 
   let results = [];
   let db = new sqlite3.Database('names.db3', err => {
@@ -26,6 +31,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   let sql = `SELECT name FROM names
             WHERE LENGTH(name) > ${min}
             AND LENGTH(name) < ${max}
+            ${lettersQuery}
              LIMIT 10`;
 
   db.all(sql, [], (err, rows) => {

@@ -2,15 +2,20 @@ import React from 'react';
 import axios from 'axios';
 
 export default class Filters extends React.Component {
+  // Search by letters:
+  // https://stackoverflow.com/a/1580104/3996097
   state = {
     min: 0,
     max: 10,
-    letters: ['a']
+    letters: []
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { min, max, letters } = this.state;
+    let { min, max, letters } = this.state;
+    // Query won't work without something for letters.
+    if (letters.length === 0) letters = ['_____'];
+
     const results = axios.get(
       `http://localhost:3000/search/${min}/${max}/${letters}`
     );
@@ -35,6 +40,12 @@ export default class Filters extends React.Component {
             placeholder="Max Length"
             id="max"
             value={this.state.max}
+            onChange={this.handleChange}
+          />
+          <input
+            placeholder="Letters"
+            id="letters"
+            value={this.state.letters}
             onChange={this.handleChange}
           />
           <input type="submit" />
