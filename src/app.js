@@ -39,18 +39,40 @@ class App extends React.Component {
     });
   };
 
+  saveToStorage = saved => {
+    const save = JSON.stringify(saved);
+    localStorage.setItem('sa_name_gen', save);
+  };
+
   toggleSaveName = name => {
     if (this.state.saved.includes(name)) {
       const filtered = this.state.saved.filter(allnames => allnames !== name);
-      this.setState((state, props) => {
-        return { saved: filtered };
-      });
+      this.setState(
+        (state, props) => {
+          return { saved: filtered };
+        },
+        () => {
+          this.saveToStorage(this.state.saved);
+        }
+      );
     } else {
-      this.setState((state, props) => {
-        return { saved: [name, ...state.saved] };
-      });
+      this.setState(
+        (state, props) => {
+          return { saved: [name, ...state.saved] };
+        },
+        () => {
+          this.saveToStorage(this.state.saved);
+        }
+      );
     }
   };
+
+  componentDidMount() {
+    const load = localStorage.getItem('sa_name_gen');
+    if (load) {
+      this.setState({ saved: JSON.parse(load) });
+    }
+  }
 
   render() {
     return (
