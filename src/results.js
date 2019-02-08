@@ -24,6 +24,12 @@ export default class Results extends React.Component {
   state = { dataLoaded: false };
   smallData = [];
   smallArray = [];
+  componentDidUpdate(prevProps) {
+    // I guess it's possible for a new search to have the same [9]th prop...
+    if (this.props.results[9] !== prevProps.results[9]) {
+      // New props, load them
+      this.setState({ dataLoaded: false });
+    }
 
   componentDidUpdate() {
     if (this.state.dataLoaded === false && this.props.results.length > 0) {
