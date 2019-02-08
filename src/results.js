@@ -12,7 +12,9 @@ export default class Results extends React.Component {
           const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
           return (
             <div className="results" key={id}>
-              {nn}
+              <button onClick={this.props.toggleSaveName.bind(null, nn)}>
+                {nn}
+              </button>
             </div>
           );
         })}

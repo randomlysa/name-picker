@@ -11,7 +11,8 @@ class App extends React.Component {
     min: 0,
     max: 10,
     letters: [],
-    results: []
+    results: [],
+    saved: ''
   };
 
   handleChange = e => {
@@ -35,6 +36,12 @@ class App extends React.Component {
     });
   };
 
+  toggleSaveName = name => {
+    this.setState((state, props) => {
+      return { saved: [name, ...state.saved] };
+    });
+  };
+
   render() {
     return (
       <div>
@@ -45,7 +52,10 @@ class App extends React.Component {
           max={this.state.max}
           letters={this.state.letters}
         />
-        <Results results={this.state.results} />
+        <Results
+          results={this.state.results}
+          toggleSaveName={this.toggleSaveName}
+        />
       </div>
     );
   }
