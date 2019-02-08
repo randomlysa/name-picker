@@ -1,4 +1,20 @@
 import React from 'react';
+import styled from '@emotion/styled';
+
+const Button = styled.button`
+  padding: 1em;
+  border: solid 1px #000;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.3em;
+  transition: all 0.3s;
+  float: left;
+  margin: 1em;
+
+  :hover {
+    background-color: #fff;
+  }
+`;
 
 export default class Results extends React.Component {
   render() {
@@ -12,9 +28,9 @@ export default class Results extends React.Component {
           const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
           return (
             <div className="results" key={id}>
-              <button onClick={this.props.toggleSaveName.bind(null, nn)}>
+              <Button onClick={this.props.toggleSaveName.bind(null, nn)}>
                 {nn}
-              </button>
+              </Button>
             </div>
           );
         })}
