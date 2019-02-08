@@ -6,24 +6,35 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "jest-dom": "^3.0.2",
     "react": "^16.0.0",
     "react-doc": "^1.2.6",
     "react-dom": "^16.8.1",
+    "react-testing-library": "^5.5.3",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "cssnano": "^4.1.8"
+    "cssnano": "^4.1.8",
+    "jest": "^24.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+    }
   }
 }
