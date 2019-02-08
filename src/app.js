@@ -1,4 +1,5 @@
 // name list:  https://github.com/arineng/arincli
+// colors: https://coolors.co/493657-ce7da5-bee5bf-dff3e3-ffd1ba
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
