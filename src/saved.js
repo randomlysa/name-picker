@@ -27,6 +27,7 @@ export default class Saved extends React.Component {
   render() {
     return (
       <Fixed>
+        Click to remove:
         {this.props.saved.map(name => {
           return (
             <Name
