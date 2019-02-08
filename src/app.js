@@ -40,9 +40,16 @@ class App extends React.Component {
   };
 
   toggleSaveName = name => {
-    this.setState((state, props) => {
-      return { saved: [name, ...state.saved] };
-    });
+    if (this.state.saved.includes(name)) {
+      const filtered = this.state.saved.filter(allnames => allnames !== name);
+      this.setState((state, props) => {
+        return { saved: filtered };
+      });
+    } else {
+      this.setState((state, props) => {
+        return { saved: [name, ...state.saved] };
+      });
+    }
   };
 
   render() {
