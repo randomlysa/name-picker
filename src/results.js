@@ -21,12 +21,13 @@ const Button = styled.button`
 `;
 
 export default class Results extends React.Component {
+  state = { dataLoaded: false };
   smallData = [];
   smallArray = [];
 
   componentDidUpdate() {
-    if (this.props.dataLoaded === false && this.props.results.length > 0) {
-      this.props.setLoaded(false);
+    if (this.state.dataLoaded === false && this.props.results.length > 0) {
+      this.setState({ dataLoaded: false });
       // Clear out previous data.
       this.smallData = [];
       this.smallArray = [];
@@ -39,14 +40,14 @@ export default class Results extends React.Component {
           this.smallArray = [];
         }
       });
-      this.props.setLoaded(true);
+      this.setState({ dataLoaded: true });
     }
   }
   render() {
     if (!this.props.searched) {
       return 'No Results - Do a search!';
     }
-    if (!this.props.dataLoaded) {
+    if (!this.state.dataLoaded) {
       return (
         <span>
           <img src={loading} alt="Loading..." />
