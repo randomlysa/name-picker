@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import Saved from './saved';
 import Filters from './filters';
 import Results from './results';
 
@@ -14,7 +15,7 @@ class App extends React.Component {
     max: 10,
     letters: [],
     results: [],
-    saved: ''
+    saved: []
   };
 
   handleChange = e => {
@@ -46,6 +47,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Saved saved={this.state.saved} />
         <Filters
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
