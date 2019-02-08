@@ -33,7 +33,6 @@ class App extends React.Component {
       `http://${devServer}/search/${min}/${max}/${letters}`
     );
     results.then(r => {
-      console.log(r.data);
       this.setState({ results: r.data });
     });
   };
