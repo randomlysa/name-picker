@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+// https://icons8.com/preloaders/en/free/3/
 import loading from './487.gif';
 
 const PageCenter = styled.div`
