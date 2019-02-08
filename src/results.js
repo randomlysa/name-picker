@@ -34,6 +34,18 @@ export default class Results extends React.Component {
       this.props.results.map((item, index) => {
         // Add items to smaller array.
         this.smallArray.push(item);
+
+        // If results are < 100, the second if will never run and results never
+        // be pushed to smallData. Found this out the fun way! (When testing
+        // with 4 names as test data.)
+        if (
+          this.props.results.length < 100 &&
+          this.props.results.length === index + 1
+        ) {
+          this.smallData.push(this.smallArray);
+          this.smallArray = [];
+        }
+        // And for larger results
         // Push small array into big and clear out small.
         if (index !== 0 && index % 100 === 0) {
           this.smallData.push(this.smallArray);
