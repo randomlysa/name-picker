@@ -1,0 +1,4 @@
+const prodServer = 'NOPE:PORT';
+const devServer = 'localhost:3001';
+
+export { prodServer, devServer };
