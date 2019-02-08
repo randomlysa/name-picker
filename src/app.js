@@ -70,6 +70,10 @@ class App extends React.Component {
       `http://${devServer}/search/${min}/${max}/${letters}`
     );
     results.then(r => {
+      if (r.data.length === 0) {
+        this.setState({ errorMessage: "Sorry, we couldn't find that!!!" });
+        return;
+      }
       this.setState({ results: r.data });
     });
   };
