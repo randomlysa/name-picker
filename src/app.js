@@ -59,6 +59,7 @@ class App extends React.Component {
         <Results
           results={this.state.results}
           toggleSaveName={this.toggleSaveName}
+          saved={this.state.saved}
         />
       </div>
     );

@@ -11,8 +11,10 @@ const Button = styled.button`
   float: left;
   margin: 1em;
 
+  background: ${props => (props.saved ? '#CE7DA5' : '#ddd')};
+
   :hover {
-    background-color: #fff;
+    background: ${props => (props.saved ? '#CE7DA5' : '#fff')};
   }
 `;
 
@@ -24,11 +26,18 @@ export default class Results extends React.Component {
     return (
       <div>
         {this.props.results.map(data => {
+          let saved = false;
           const [name, id] = data;
           const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
+
+          if (this.props.saved.includes(nn)) saved = true;
+
           return (
             <div className="results" key={id}>
-              <Button onClick={this.props.toggleSaveName.bind(null, nn)}>
+              <Button
+                saved={saved}
+                onClick={this.props.toggleSaveName.bind(null, nn)}
+              >
                 {nn}
               </Button>
             </div>
