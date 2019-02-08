@@ -14,6 +14,8 @@ const Pagination = styled.div`
   position: fixed;
   top: 0;
   right: 0;
+  background-color: #fff;
+  padding: 1.3em;
 `;
 
 const PageButton = styled.button`
