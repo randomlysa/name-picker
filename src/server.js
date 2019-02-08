@@ -12,6 +12,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   let min = req.params.min;
   let max = req.params.max;
   let letters = req.params.letters;
+
   if (!min) min = 10;
   if (!max) max = 15;
 
@@ -37,7 +38,7 @@ app.get('/search/:min/:max/:letters', function(req, res) {
             WHERE LENGTH(name) >= ${min}
             AND LENGTH(name) <= ${max}
             ${lettersQuery}
-             LIMIT 10`;
+             LIMIT 1000`;
 
   db.all(sql, [], (err, rows) => {
     if (err) {
@@ -58,4 +59,4 @@ app.get('/search/:min/:max/:letters', function(req, res) {
   });
 });
 
-app.listen(3000, () => console.log('App listening on port 3000!'));
+app.listen(3001, () => console.log('App listening on port 3001!'));
