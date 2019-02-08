@@ -9,6 +9,15 @@ import Filters from './filters';
 import Results from './results';
 
 import { prodServer, devServer } from './config';
+import styled from '@emotion/styled';
+
+const ErrorContainer = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.7em;
+`;
 
 class App extends React.Component {
   state = {
@@ -124,7 +133,7 @@ class App extends React.Component {
           max={this.state.max}
           letters={this.state.letters}
         />
-        {<div>{this.state.errorMessage}</div>}
+        {<ErrorContainer>{this.state.errorMessage}</ErrorContainer>}
         <Results
           results={this.state.results}
           toggleSaveName={this.toggleSaveName}
