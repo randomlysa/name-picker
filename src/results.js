@@ -3,6 +3,13 @@ import styled from '@emotion/styled';
 
 import loading from './487.gif';
 
+const PageCenter = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const Pagination = styled.div`
   position: fixed;
   top: 0;
@@ -113,13 +120,13 @@ export default class Results extends React.Component {
 
   render() {
     if (!this.props.searched) {
-      return 'No Results - Do a search!';
+      return <PageCenter>No Results - Do a search!</PageCenter>;
     }
     if (!this.state.dataLoaded) {
       return (
-        <span>
+        <PageCenter>
           <img src={loading} alt="Loading..." />
-        </span>
+        </PageCenter>
       );
     }
 
