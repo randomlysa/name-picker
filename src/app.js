@@ -16,7 +16,12 @@ class App extends React.Component {
     max: 10,
     letters: [],
     results: [],
-    saved: []
+    saved: [],
+    dataLoaded: false
+  };
+
+  setLoaded = which => {
+    this.setState({ dataLoaded: which });
   };
 
   handleChange = e => {
@@ -25,6 +30,10 @@ class App extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    // Clear out results otherwise they stay mixed in with old results when
+    // doing a new search (when splitting up data into smaller arrays in
+    // ./results)
+    this.setState({ dataLoaded: false, results: [] });
     let { min, max, letters } = this.state;
     // Query won't work without something for letters.
     if (!min) min = 0;
@@ -89,6 +98,8 @@ class App extends React.Component {
           results={this.state.results}
           toggleSaveName={this.toggleSaveName}
           saved={this.state.saved}
+          setLoaded={this.setLoaded}
+          dataLoaded={this.state.dataLoaded}
         />
       </div>
     );
