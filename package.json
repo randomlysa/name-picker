@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/styled": "^10.0.7",
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
