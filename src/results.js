@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import loading from './487.gif';
+
 const Button = styled.button`
   padding: 1em;
   border: solid 1px #000;
@@ -41,9 +43,17 @@ export default class Results extends React.Component {
     }
   }
   render() {
-    if (!this.props.dataLoaded) {
+    if (!this.props.searched) {
       return 'No Results - Do a search!';
     }
+    if (!this.props.dataLoaded) {
+      return (
+        <span>
+          <img src={loading} alt="Loading..." />
+        </span>
+      );
+    }
+
     return (
       <div>
         {this.smallData[0].map(data => {

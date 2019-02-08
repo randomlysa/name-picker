@@ -18,7 +18,8 @@ class App extends React.Component {
     results: [],
     saved: [],
     dataLoaded: false,
-    errorMessage: ''
+    errorMessage: '',
+    searched: false
   };
 
   setLoaded = which => {
@@ -58,6 +59,7 @@ class App extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if (!this.validateForm()) return;
+    this.setState({ searched: true });
 
     // Clear out results otherwise they stay mixed in with old results when
     // doing a new search (when splitting up data into smaller arrays in
@@ -130,6 +132,7 @@ class App extends React.Component {
           saved={this.state.saved}
           setLoaded={this.setLoaded}
           dataLoaded={this.state.dataLoaded}
+          searched={this.state.searched}
         />
       </div>
     );
