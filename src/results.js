@@ -63,7 +63,6 @@ export default class Results extends React.Component {
     }
 
     if (this.state.dataLoaded === false && this.props.results.length > 0) {
-      console.log('updated');
       this.setState({ dataLoaded: false });
       // Clear out previous data.
       this.smallData = [];
@@ -102,7 +101,6 @@ export default class Results extends React.Component {
     for (var i = 0; i < this.smallData.length; i++) {
       let areWeOnThisPage = false;
       if (this.state.currentPage === i) {
-        console.log('true', i);
         areWeOnThisPage = true;
       }
       const myButton = (
