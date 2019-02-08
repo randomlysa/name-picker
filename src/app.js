@@ -6,6 +6,8 @@ import axios from 'axios';
 import Filters from './filters';
 import Results from './results';
 
+import { prodServer, devServer } from './config';
+
 class App extends React.Component {
   state = {
     min: 0,
@@ -28,7 +30,7 @@ class App extends React.Component {
     if (letters.length === 0) letters = ['_____'];
 
     const results = axios.get(
-      `http://localhost:3000/search/${min}/${max}/${letters}`
+      `http://${devServer}/search/${min}/${max}/${letters}`
     );
     results.then(r => {
       console.log(r.data);
