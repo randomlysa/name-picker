@@ -3,6 +3,27 @@ import styled from '@emotion/styled';
 
 import loading from './487.gif';
 
+const Pagination = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+`;
+
+const PageButton = styled.button`
+  background-color: #fff;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  background: ${props => (props.current ? '#BEE5BF' : '')};
+  font-family: inherit;
+  font-size: 0.9em;
+  padding: 1em;
+
+  :hover {
+    background: #ffd1ba;
+  }
+`;
+
 const Button = styled.button`
   padding: 1em;
   border: solid 1px #000;
@@ -21,9 +42,12 @@ const Button = styled.button`
 `;
 
 export default class Results extends React.Component {
-  state = { dataLoaded: false };
+  state = { dataLoaded: false, currentPage: 0 };
+
   smallData = [];
   smallArray = [];
+  page = 0;
+
   componentDidUpdate(prevProps) {
     // I guess it's possible for a new search to have the same [9]th prop...
     if (this.props.results[9] !== prevProps.results[9]) {
@@ -31,8 +55,8 @@ export default class Results extends React.Component {
       this.setState({ dataLoaded: false });
     }
 
-  componentDidUpdate() {
     if (this.state.dataLoaded === false && this.props.results.length > 0) {
+      console.log('updated');
       this.setState({ dataLoaded: false });
       // Clear out previous data.
       this.smallData = [];
@@ -61,6 +85,32 @@ export default class Results extends React.Component {
       this.setState({ dataLoaded: true });
     }
   }
+
+  changePage = page => {
+    this.setState({ currentPage: page });
+  };
+
+  doPagination = () => {
+    const results = [];
+    for (var i = 0; i < this.smallData.length; i++) {
+      let areWeOnThisPage = false;
+      if (this.state.currentPage === i) {
+        console.log('true', i);
+        areWeOnThisPage = true;
+      }
+      const myButton = (
+        <PageButton
+          current={areWeOnThisPage}
+          onClick={this.changePage.bind(this, i)}
+        >
+          {i}
+        </PageButton>
+      );
+      results.push(myButton);
+    }
+    return results;
+  };
+
   render() {
     if (!this.props.searched) {
       return 'No Results - Do a search!';
@@ -75,7 +125,7 @@ export default class Results extends React.Component {
 
     return (
       <div>
-        {this.smallData[0].map(data => {
+        {this.smallData[this.state.currentPage].map(data => {
           let saved = false;
           const [name, id] = data;
           const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
@@ -93,6 +143,7 @@ export default class Results extends React.Component {
             </div>
           );
         })}
+        <Pagination>Page: {this.doPagination()}</Pagination>
       </div>
     );
   }
