@@ -14,10 +14,11 @@ class App extends React.Component {
   state = {
     min: 0,
     max: 10,
-    letters: [],
+    letters: '',
     results: [],
     saved: [],
-    dataLoaded: false
+    dataLoaded: false,
+    errorMessage: ''
   };
 
   setLoaded = which => {
@@ -28,8 +29,36 @@ class App extends React.Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  validateForm = e => {
+    // This should be enough for here... need better validation on server most likely.
+    const RegNumbers = /^[0-9]+$/;
+    const RegLetters = /^[a-z]+$/;
+    let { min, max, letters } = this.state;
+    // If letters is empty or if it passes Regex
+    if ((min && !RegNumbers.test(min)) || (max && !RegNumbers.test(max))) {
+      this.setState({
+        errorMessage: 'Please use only numbers in the numbers fields!!!'
+      });
+      return false;
+    }
+
+    if (letters && !RegLetters.test(letters)) {
+      this.setState({
+        errorMessage:
+          'Please use only letters in the letters field !!!!!!!!!!!!!!'
+      });
+      document.getElementById('letters').value = '';
+      return false;
+    }
+
+    this.setState({ errorMessage: '' });
+    return true;
+  };
+
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.validateForm()) return;
+
     // Clear out results otherwise they stay mixed in with old results when
     // doing a new search (when splitting up data into smaller arrays in
     // ./results)
@@ -94,6 +123,7 @@ class App extends React.Component {
           max={this.state.max}
           letters={this.state.letters}
         />
+        {<div>{this.state.errorMessage}</div>}
         <Results
           results={this.state.results}
           toggleSaveName={this.toggleSaveName}
