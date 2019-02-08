@@ -105,8 +105,10 @@ export default class Results extends React.Component {
       if (this.state.currentPage === i) {
         areWeOnThisPage = true;
       }
+      const pageKey = `page_${i}`;
       const myButton = (
         <PageButton
+          key={pageKey}
           current={areWeOnThisPage}
           onClick={this.changePage.bind(this, i)}
         >
