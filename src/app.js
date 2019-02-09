@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import Saved from './saved';
-import Filters from './filters';
-import Results from './results';
+import Saved from './Containers/saved';
+import Filters from './Containers/filters';
+import Results from './Containers/results';
 
 import { prodServer, devServer } from './config';
 import styled from '@emotion/styled';

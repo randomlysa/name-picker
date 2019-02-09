@@ -7,7 +7,7 @@ import {
 } from 'react-testing-library';
 // this adds custom jest matchers from jest-dom
 import 'jest-dom/extend-expect';
-import Results from '../results.js';
+import Results from '../Containers/results.js';
 
 import * as mockData from '../../__mocks__/mockResultsData';
 
