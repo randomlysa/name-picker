@@ -125,7 +125,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Saved saved={this.state.saved} toggleSaveName={this.toggleSaveName} />
+        {this.state.saved.length > 0 && (
+          <Saved
+            saved={this.state.saved}
+            toggleSaveName={this.toggleSaveName}
+          />
+        )}
         <Filters
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
