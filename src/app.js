@@ -37,7 +37,7 @@ class App extends React.Component {
   validateForm = e => {
     // This should be enough for here... need better validation on server most likely.
     const RegNumbers = /^[0-9]+$/;
-    const RegLetters = /^[a-z]+$/;
+    const RegLetters = /^[a-zA-Z]+$/;
     let { min, max, letters } = this.state;
     // If letters is empty or if it passes Regex
     if ((min && !RegNumbers.test(min)) || (max && !RegNumbers.test(max))) {
