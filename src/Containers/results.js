@@ -17,6 +17,12 @@ const Pagination = styled.div`
   right: 0;
   background-color: #fff;
   padding: 1.3em;
+  display: flex;
+  flex-wrap: wrap;
+
+  /* @media screen and (max-width: 1200px) {
+    position: static;
+  } */
 `;
 
 const PageButton = styled.button`
@@ -28,6 +34,7 @@ const PageButton = styled.button`
   font-family: inherit;
   font-size: 0.9em;
   padding: 1em;
+  display: ${props => (props.display ? 'block' : 'none')};
 
   :hover {
     background: #ffd1ba;
@@ -61,7 +68,7 @@ const Button = styled.button`
 `;
 
 export default class Results extends React.Component {
-  state = { dataLoaded: false, currentPage: 0 };
+  state = { dataLoaded: false, currentPage: 0, showPagination: false };
 
   smallData = [];
   smallArray = [];
@@ -105,7 +112,18 @@ export default class Results extends React.Component {
   }
 
   changePage = page => {
-    this.setState({ currentPage: page });
+    // Todo: hide pages when scrolling starts? Or add an [x] button to hide.
+
+    // After a search, only the current page # is shown (probably need to change
+    // this to indicate there are more pages.) In this state, when clicking
+    // on the current page # (the only page # shown), expand pagination to show
+    // all page #'s.
+    if (page == this.state.currentPage) {
+      this.setState({ showPagination: true });
+    } else {
+      // Otherwise, change the page
+      this.setState({ currentPage: page });
+    }
   };
 
   doPagination = () => {
@@ -115,11 +133,15 @@ export default class Results extends React.Component {
       if (this.state.currentPage === i) {
         areWeOnThisPage = true;
       }
+
       const pageKey = `page_${i}`;
+      // Why I used display={x || y ? 1 : 0} below:
+      // https://stackoverflow.com/a/49786272/3996097
       const myButton = (
         <PageButton
           key={pageKey}
           current={areWeOnThisPage}
+          display={this.state.showPagination || areWeOnThisPage ? 1 : 0}
           onClick={this.changePage.bind(this, i)}
         >
           {i + 1}
