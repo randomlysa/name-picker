@@ -113,7 +113,7 @@ export default class Results extends React.Component {
           current={areWeOnThisPage}
           onClick={this.changePage.bind(this, i)}
         >
-          {i}
+          {i + 1}
         </PageButton>
       );
       results.push(myButton);
