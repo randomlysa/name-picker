@@ -34,6 +34,12 @@ const PageButton = styled.button`
   }
 `;
 
+const ResultsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+
 const Button = styled.button`
   padding: 1em;
   border: solid 1px #000;
@@ -41,13 +47,16 @@ const Button = styled.button`
   font-family: inherit;
   font-size: 1.3em;
   transition: all 0.3s;
-  float: left;
   margin: 1em;
 
   background: ${props => (props.saved ? '#CE7DA5' : '#ddd')};
 
   :hover {
     background: ${props => (props.saved ? '#CE7DA5' : '#fff')};
+  }
+
+  @media screen and (max-width: 500px) {
+    margin: 0.5em;
   }
 `;
 
@@ -134,7 +143,7 @@ export default class Results extends React.Component {
     }
 
     return (
-      <div>
+      <ResultsContainer>
         {this.smallData[this.state.currentPage].map(data => {
           let saved = false;
           const [name, id] = data;
@@ -143,18 +152,16 @@ export default class Results extends React.Component {
           if (this.props.saved.includes(nn)) saved = true;
 
           return (
-            <div className="results" key={id}>
-              <Button
-                saved={saved}
-                onClick={this.props.toggleSaveName.bind(null, nn)}
-              >
-                {nn}
-              </Button>
-            </div>
+            <Button
+              saved={saved}
+              onClick={this.props.toggleSaveName.bind(null, nn)}
+            >
+              {nn}
+            </Button>
           );
         })}
         <Pagination>Page: {this.doPagination()}</Pagination>
-      </div>
+      </ResultsContainer>
     );
   }
 }
