@@ -1,18 +1,85 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import searchIcon from '../img/iconmonstr-magnifier-1-32.png';
+
+const ToggleSearchIconButton = styled.button`
+  background: none;
+  border: none;
+  border-radius: 100px;
+  margin: 1em;
+  padding: 1em;
+  cursor: pointer;
+
+  :hover {
+    background: #ffd1ba;
+  }
+`;
+
+const SearchIcon = styled.img`
+  cursor: pointer;
+  margin-left: 1em;
+  transform: translateX(-6px);
+`;
+
+// Form items
+const SearchForm = styled.form`
+  display: ${props => (props.displaySearchForm ? 'flex' : 'none')};
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+
 const StyledInput = styled.input`
-  width: 5em;
+  width: 100px;
+  margin: 0;
+  background: none;
+  border: solid 1px;
+  border-radius: 10px;
+  padding: 0.5em;
+
+  :focus {
+    background: #ffd1ba;
+  }
+`;
+
+const SubmitButton = styled.input`
+  padding: 0.5em;
+  width: 300px;
+  margin: 1em;
+  background: #bee5bf;
+  border: solid 1px;
+  border-radius: 10px;
+
+  :active {
+    background-color: #dff3e3;
+  }
 `;
 
 export default class Filters extends React.Component {
+  state = { displaySearch: true };
   // Search by letters:
   // https://stackoverflow.com/a/1580104/3996097
+
+  toggleSearch = () => {
+    this.setState(state => {
+      return { displaySearch: !state.displaySearch };
+    });
+  };
 
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.props.handleSubmit}>
+        <ToggleSearchIconButton>
+          <SearchIcon
+            src={searchIcon}
+            alt="search"
+            onClick={this.toggleSearch}
+          />
+        </ToggleSearchIconButton>
+        <SearchForm
+          onSubmit={this.props.handleSubmit}
+          displaySearchForm={this.state.displaySearch}
+        >
           <StyledInput
             size="3"
             type="number"
@@ -35,8 +102,8 @@ export default class Filters extends React.Component {
             value={this.props.letters}
             onChange={this.props.handleChange}
           />
-          <input type="submit" />
-        </form>
+          <SubmitButton type="submit" value="Search!" />
+        </SearchForm>
       </React.Fragment>
     );
   }
