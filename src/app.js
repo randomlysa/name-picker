@@ -1,5 +1,11 @@
 // name list:  https://github.com/arineng/arincli
 // colors: https://coolors.co/493657-ce7da5-bee5bf-dff3e3-ffd1ba
+// purple:      493657
+// pink:        CE7DA5
+// dark green   BEE5BF
+// light green  DFF3E3
+// tan          FFD1BA
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
