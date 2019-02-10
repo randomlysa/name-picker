@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const Fixed = styled.div`
+const SavedListContainer = styled.div`
   position: fixed;
   bottom: 0;
   background-color: #dff3e3;
   padding: 1em;
+  width: 100%;
 `;
 
 const Name = styled.button`
@@ -26,7 +27,7 @@ const Name = styled.button`
 export default class Saved extends React.Component {
   render() {
     return (
-      <Fixed>
+      <SavedListContainer>
         Click to remove:
         {this.props.saved.map(name => {
           return (
@@ -38,7 +39,7 @@ export default class Saved extends React.Component {
             </Name>
           );
         })}
-      </Fixed>
+      </SavedListContainer>
     );
   }
 }
