@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import throttle from 'lodash.throttle';
 
 // https://icons8.com/preloaders/en/free/3/
 import loading from '../img/487.gif';
@@ -73,6 +74,18 @@ export default class Results extends React.Component {
   smallData = [];
   smallArray = [];
   page = 0;
+
+  closePagination = () => {
+    this.setState({ showPagination: false });
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', throttle(this.closePagination, 1000));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll');
+  }
 
   componentDidUpdate(prevProps) {
     // I guess it's possible for a new search to have the same [9]th prop...
