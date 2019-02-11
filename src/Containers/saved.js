@@ -61,7 +61,7 @@ export default class Saved extends React.Component {
           <img src={ListIcon} />
         </ToggleSavedListButton>
         <ListWithLabelText display={this.state.showListWithLabel ? 1 : 0}>
-          Click to remove:
+          {this.props.saved.length === 1 && 'Click to remove:'}
           {this.props.saved.map(name => {
             return (
               <Name
