@@ -85,7 +85,7 @@ export default class Results extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll');
+    window.removeEventListener('scroll', throttle);
   }
 
   componentDidUpdate(prevProps) {
