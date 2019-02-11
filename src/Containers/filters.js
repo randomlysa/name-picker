@@ -76,6 +76,11 @@ export default class Filters extends React.Component {
   // Search by letters:
   // https://stackoverflow.com/a/1580104/3996097
 
+  doSearch = e => {
+    this.setState({ displaySearch: false });
+    this.props.handleSubmit(e);
+  };
+
   toggleSearch = () => {
     this.setState(state => {
       return { displaySearch: !state.displaySearch };
@@ -95,7 +100,7 @@ export default class Filters extends React.Component {
           </ToggleSearchIconButton>
         </BlankHeader>
         <SearchForm
-          onSubmit={this.props.handleSubmit}
+          onSubmit={this.doSearch}
           displaySearchForm={this.state.displaySearch}
         >
           <StyledInput
