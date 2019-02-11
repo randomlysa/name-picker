@@ -17,10 +17,11 @@ const Pagination = styled.div`
   position: fixed;
   top: 0;
   right: 0;
+  padding-top: 0.5em;
   background-color: #fff;
-  padding: 1.3em;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 
   /* @media screen and (max-width: 1200px) {
     position: static;
@@ -148,6 +149,14 @@ export default class Results extends React.Component {
       }
 
       const pageKey = `page_${i}`;
+
+      // When pagination is close, show `currentPage / totalPages`'
+      // otherwise, just show the page number.
+      let extraText = '';
+      if (!this.state.showPagination && areWeOnThisPage) {
+        extraText = `/ ${this.smallData.length}`;
+      }
+
       // Why I used display={x || y ? 1 : 0} below:
       // https://stackoverflow.com/a/49786272/3996097
       const myButton = (
@@ -157,7 +166,7 @@ export default class Results extends React.Component {
           display={this.state.showPagination || areWeOnThisPage ? 1 : 0}
           onClick={this.changePage.bind(this, i)}
         >
-          {i + 1}
+          {i + 1} {extraText}
         </PageButton>
       );
       results.push(myButton);
@@ -195,7 +204,7 @@ export default class Results extends React.Component {
             </Button>
           );
         })}
-        <Pagination>Page: {this.doPagination()}</Pagination>
+        <Pagination>{this.doPagination()}</Pagination>
       </ResultsContainer>
     );
   }
