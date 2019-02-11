@@ -28,11 +28,10 @@ const Pagination = styled.div`
 `;
 
 const PageButton = styled.button`
-  background-color: #fff;
   border: none;
   padding: 0.5em;
   cursor: pointer;
-  background: ${props => (props.current ? '#BEE5BF' : '')};
+  background: ${props => (props.current ? '#BEE5BF' : '#fff')};
   font-family: inherit;
   font-size: 0.9em;
   padding: 1em;
