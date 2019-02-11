@@ -3,12 +3,23 @@ import styled from '@emotion/styled';
 
 import searchIcon from '../img/iconmonstr-magnifier-1-32.png';
 
+const BlankHeader = styled.div`
+  background-color: #fff;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+
 const ToggleSearchIconButton = styled.button`
   background: none;
   border: none;
   border-radius: 100px;
   margin: 1em;
   padding: 1em;
+  position: fixed;
+  top: 0;
   cursor: pointer;
 
   :hover {
@@ -24,9 +35,12 @@ const SearchIcon = styled.img`
 
 // Form items
 const SearchForm = styled.form`
+  background: #fff;
   display: ${props => (props.displaySearchForm ? 'flex' : 'none')};
   flex-wrap: wrap;
   justify-content: space-around;
+  position: fixed;
+  top: 70px;
 `;
 
 const StyledInput = styled.input`
@@ -71,13 +85,15 @@ export default class Filters extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ToggleSearchIconButton>
-          <SearchIcon
-            src={searchIcon}
-            alt="search"
-            onClick={this.toggleSearch}
-          />
-        </ToggleSearchIconButton>
+        <BlankHeader>
+          <ToggleSearchIconButton>
+            <SearchIcon
+              src={searchIcon}
+              alt="search"
+              onClick={this.toggleSearch}
+            />
+          </ToggleSearchIconButton>
+        </BlankHeader>
         <SearchForm
           onSubmit={this.props.handleSubmit}
           displaySearchForm={this.state.displaySearch}
