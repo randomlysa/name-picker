@@ -30,12 +30,13 @@ const SearchForm = styled.form`
 `;
 
 const StyledInput = styled.input`
-  width: 100px;
-  margin: 0;
+  padding: 0.5em;
+  margin: 0.3em;
+  width: 80%;
+
   background: none;
   border: solid 1px;
   border-radius: 10px;
-  padding: 0.5em;
 
   :focus {
     background: #ffd1ba;
@@ -44,8 +45,9 @@ const StyledInput = styled.input`
 
 const SubmitButton = styled.input`
   padding: 0.5em;
-  width: 300px;
-  margin: 1em;
+  margin: 0.3em;
+  width: 80%;
+
   background: #bee5bf;
   border: solid 1px;
   border-radius: 10px;
