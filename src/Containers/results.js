@@ -71,7 +71,14 @@ const Button = styled.button`
 `;
 
 export default class Results extends React.Component {
-  state = { dataLoaded: false, currentPage: 0, showPagination: false };
+  // Animation/transition on page change:
+  // https://muffinman.io/react-rerender-in-component-did-mount/
+  state = {
+    dataLoaded: false,
+    currentPage: 0,
+    showPagination: false,
+    animate: false
+  };
 
   smallData = [];
   smallArray = [];
@@ -137,6 +144,11 @@ export default class Results extends React.Component {
       this.setState({ showPagination: true });
     } else {
       // Otherwise, change the page
+      requestAnimationFrame(() => {
+        this.setState({ animate: true }, () => {
+          window.setTimeout(() => this.setState({ animate: false }), 100);
+        });
+      });
       this.setState({ currentPage: page });
       window.scrollTo(0, 0);
     }
@@ -189,7 +201,12 @@ export default class Results extends React.Component {
     }
 
     return (
-      <ResultsContainer>
+      <ResultsContainer
+        style={{
+          opacity: this.state.animate ? 0.2 : 0.8,
+          transition: 'all .1s'
+        }}
+      >
         {this.smallData[this.state.currentPage].map(data => {
           let saved = false;
           const [name, id] = data;
