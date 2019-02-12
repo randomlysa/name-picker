@@ -9,6 +9,7 @@ const SavedListContainer = styled.div`
   bottom: 0;
   background-color: ${props => (props.width ? '#dff3e3' : 'none')};
   width: ${props => (props.width ? '100%' : '0px')};
+  z-index: 5;
 `;
 
 /* LabelText = 'Click to remove' */
