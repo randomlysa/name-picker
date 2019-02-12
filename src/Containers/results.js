@@ -138,6 +138,7 @@ export default class Results extends React.Component {
     } else {
       // Otherwise, change the page
       this.setState({ currentPage: page });
+      window.scrollTo(0, 0);
     }
   };
 
