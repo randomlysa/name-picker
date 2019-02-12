@@ -41,7 +41,7 @@ const SearchForm = styled.form`
   flex-wrap: wrap;
   justify-content: space-around;
   position: fixed;
-  top: 70px;
+  top: 85px;
 `;
 
 const StyledInput = styled.input`
