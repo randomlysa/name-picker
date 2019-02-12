@@ -54,10 +54,17 @@ const ResultsContainer = styled.div`
 
 const AnimatedContainer = posed.div({
   visible: {
-    x: '0%'
+    x: '0%',
+    transition: {
+      duration: 300
+    },
+    applyAtStart: { x: '100%' }
   },
   hidden: {
-    x: '-100%'
+    x: '-100%',
+    transition: {
+      duration: 200
+    }
   }
 });
 
@@ -105,6 +112,7 @@ export default class Results extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', throttle);
+    // window.removeEventListener('scroll', throttle);
   }
 
   componentDidUpdate(prevProps) {
@@ -155,11 +163,11 @@ export default class Results extends React.Component {
       this.setState({ showPagination: true });
     } else {
       // Otherwise, change the page
-      requestAnimationFrame(() => {
-        this.setState({ animate: true }, () => {
-          window.setTimeout(() => this.setState({ animate: false }), 100);
-        });
+
+      this.setState({ animate: true }, () => {
+        window.setTimeout(() => this.setState({ animate: false }), 200);
       });
+
       this.setState({ currentPage: page });
       window.scrollTo(0, 0);
     }
