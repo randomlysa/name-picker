@@ -23,6 +23,7 @@ const Pagination = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 
   /* @media screen and (max-width: 1200px) {
     position: static;
@@ -201,30 +202,32 @@ export default class Results extends React.Component {
     }
 
     return (
-      <ResultsContainer
-        style={{
-          opacity: this.state.animate ? 0.2 : 0.8,
-          transition: 'all .1s'
-        }}
-      >
-        {this.smallData[this.state.currentPage].map(data => {
-          let saved = false;
-          const [name, id] = data;
-          const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
-
-          if (this.props.saved.includes(nn)) saved = true;
-
-          return (
-            <Button
-              saved={saved}
-              onClick={this.props.toggleSaveName.bind(null, nn)}
-            >
-              {nn}
-            </Button>
-          );
-        })}
+      <React.Fragment>
         <Pagination>{this.doPagination()}</Pagination>
-      </ResultsContainer>
+        <ResultsContainer
+          style={{
+            opacity: this.state.animate ? 0.2 : 0.8,
+            transition: 'all .1s'
+          }}
+        >
+          {this.smallData[this.state.currentPage].map(data => {
+            let saved = false;
+            const [name, id] = data;
+            const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
+
+            if (this.props.saved.includes(nn)) saved = true;
+
+            return (
+              <Button
+                saved={saved}
+                onClick={this.props.toggleSaveName.bind(null, nn)}
+              >
+                {nn}
+              </Button>
+            );
+          })}
+        </ResultsContainer>
+      </React.Fragment>
     );
   }
 }
