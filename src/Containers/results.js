@@ -59,7 +59,7 @@ const AnimatedContainer = posed.div({
       duration: 300
     },
     applyAtStart: { x: '100%' },
-    applyAtStart: { x: '0%' }
+    applyAtEnd: { x: '0%' }
   },
   hidden: {
     x: '-100%',
