@@ -206,7 +206,7 @@ export default class Results extends React.Component {
         <Pagination>{this.doPagination()}</Pagination>
         <ResultsContainer
           style={{
-            opacity: this.state.animate ? 0.2 : 0.8,
+            opacity: this.state.animate ? 0.01 : 1,
             transition: 'all .1s'
           }}
         >
