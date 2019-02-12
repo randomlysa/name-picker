@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import throttle from 'lodash.throttle';
+import posed from 'react-pose';
 
 // https://icons8.com/preloaders/en/free/3/
 import loading from '../img/487.gif';
@@ -50,6 +51,15 @@ const ResultsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
 `;
+
+const AnimatedContainer = posed.div({
+  visible: {
+    x: '0%'
+  },
+  hidden: {
+    x: '-100%'
+  }
+});
 
 const Button = styled.button`
   padding: 1em;
@@ -204,28 +214,25 @@ export default class Results extends React.Component {
     return (
       <React.Fragment>
         <Pagination>{this.doPagination()}</Pagination>
-        <ResultsContainer
-          style={{
-            opacity: this.state.animate ? 0.01 : 1,
-            transition: 'all .1s'
-          }}
-        >
-          {this.smallData[this.state.currentPage].map(data => {
-            let saved = false;
-            const [name, id] = data;
-            const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
+        <ResultsContainer>
+          <AnimatedContainer pose={this.state.animate ? 'hidden' : 'visible'}>
+            {this.smallData[this.state.currentPage].map(data => {
+              let saved = false;
+              const [name, id] = data;
+              const nn = name.slice(0, 1) + name.slice(1).toLowerCase();
 
-            if (this.props.saved.includes(nn)) saved = true;
+              if (this.props.saved.includes(nn)) saved = true;
 
-            return (
-              <Button
-                saved={saved}
-                onClick={this.props.toggleSaveName.bind(null, nn)}
-              >
-                {nn}
-              </Button>
-            );
-          })}
+              return (
+                <Button
+                  saved={saved}
+                  onClick={this.props.toggleSaveName.bind(null, nn)}
+                >
+                  {nn}
+                </Button>
+              );
+            })}
+          </AnimatedContainer>
         </ResultsContainer>
       </React.Fragment>
     );
