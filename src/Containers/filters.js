@@ -37,13 +37,18 @@ const SearchIcon = styled.img`
 // Form items
 const SearchForm = styled.form`
   background: #fff;
-  display: ${props => (props.displaySearchForm ? 'flex' : 'none')};
+  display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   position: fixed;
   top: 80px;
+  width: 100%;
   padding-bottom: 10px;
-  z-index: 5;
+  z-index: 4;
+  transition: all 0.4s;
+
+  transform: ${props =>
+    props.displaySearchForm ? 'translateY(0%)' : 'translateY(-100%)'};
 `;
 
 const StyledInput = styled.input`
