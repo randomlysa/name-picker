@@ -50,6 +50,10 @@ const ResultsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+
+  /* @media screen and (max-width: 500px) {
+    justify-content: center;
+  } */
 `;
 
 const AnimatedContainer = posed.div({
