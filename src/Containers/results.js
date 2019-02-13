@@ -225,8 +225,8 @@ export default class Results extends React.Component {
     return (
       <React.Fragment>
         <Pagination>{this.doPagination()}</Pagination>
-        <ResultsContainer>
-          <AnimatedContainer pose={this.state.animate ? 'hidden' : 'visible'}>
+        <AnimatedContainer pose={this.state.animate ? 'hidden' : 'visible'}>
+          <ResultsContainer>
             {this.smallData[this.state.currentPage].map(data => {
               let saved = false;
               const [name, id] = data;
@@ -243,8 +243,8 @@ export default class Results extends React.Component {
                 </ButtonForName>
               );
             })}
-          </AnimatedContainer>
-        </ResultsContainer>
+          </ResultsContainer>
+        </AnimatedContainer>
       </React.Fragment>
     );
   }
