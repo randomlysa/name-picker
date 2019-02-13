@@ -24,7 +24,8 @@ const ListWithLabelText = styled.div`
 const ToggleShowFullListButton = styled.button`
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  right: 50px;
+  z-index: 15;
 `;
 
 const ToggleSavedListButton = styled.button`
@@ -110,8 +111,8 @@ export default class Saved extends React.Component {
             {this.props.saved.map((name, index) => {
               return this.renderNamesList(name, index);
             })}
-            {this.renderShowMoreButton()}
           </ListWithLabelText>
+          {this.renderShowMoreButton()}
         </SavedListContainer>
       </React.Fragment>
     );
