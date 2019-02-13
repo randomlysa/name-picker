@@ -4,17 +4,21 @@ import styled from '@emotion/styled';
 import ListIcon from '../img/iconmonstr-menu-4-24.png';
 
 const SavedListContainer = styled.div`
+  background-color: #dff3e3;
   position: fixed;
   padding: 1em;
   bottom: 0;
-  background-color: ${props => (props.width ? '#dff3e3' : 'none')};
-  width: ${props => (props.width ? '100%' : '0px')};
+  transform: ${props =>
+    props.yPosition ? 'translateY(0)' : 'translateY(100%)'};
+  width: 100%;
   z-index: 5;
+  transition: all 0.2s;
 `;
 
 /* LabelText = 'Click to remove' */
 const ListWithLabelText = styled.div`
-  display: ${props => (props.display ? 'block' : 'none')};
+  float: right;
+  width: calc(100% - 50px);
 `;
 
 const ToggleShowFullListButton = styled.button`
@@ -24,13 +28,15 @@ const ToggleShowFullListButton = styled.button`
 `;
 
 const ToggleSavedListButton = styled.button`
-  background: none;
   border: none;
   border-radius: 100px;
   margin-right: 1em;
   padding: 1em;
   cursor: pointer;
-  float: left;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 10;
 
   :hover {
     background: #ffd1ba;
@@ -93,19 +99,21 @@ export default class Saved extends React.Component {
 
   render() {
     return (
-      <SavedListContainer width={this.state.showListWithLabel ? 1 : 0}>
+      <React.Fragment>
         <ToggleSavedListButton onClick={this.toggleDisplayListWithLabel}>
           <img src={ListIcon} />
         </ToggleSavedListButton>
-        <ListWithLabelText display={this.state.showListWithLabel ? 1 : 0}>
-          {this.props.saved.length === 1 && 'Click to remove:'}
+        <SavedListContainer yPosition={this.state.showListWithLabel ? 1 : 0}>
+          <ListWithLabelText>
+            {this.props.saved.length === 1 && 'Click to remove:'}
 
-          {this.props.saved.map((name, index) => {
-            return this.renderNamesList(name, index);
-          })}
-          {this.renderShowMoreButton()}
-        </ListWithLabelText>
-      </SavedListContainer>
+            {this.props.saved.map((name, index) => {
+              return this.renderNamesList(name, index);
+            })}
+            {this.renderShowMoreButton()}
+          </ListWithLabelText>
+        </SavedListContainer>
+      </React.Fragment>
     );
   }
 }
