@@ -69,7 +69,7 @@ const AnimatedContainer = posed.div({
   }
 });
 
-const Button = styled.button`
+const ButtonForName = styled.button`
   padding: 1em;
   border: solid 1px #000;
   cursor: pointer;
@@ -85,7 +85,9 @@ const Button = styled.button`
   }
 
   @media screen and (max-width: 500px) {
+    font-size: 1em;
     margin: 0.5em;
+    padding: 1em 0.5em;
   }
 `;
 
@@ -233,12 +235,12 @@ export default class Results extends React.Component {
               if (this.props.saved.includes(nn)) saved = true;
 
               return (
-                <Button
+                <ButtonForName
                   saved={saved}
                   onClick={this.props.toggleSaveName.bind(null, nn)}
                 >
                   {nn}
-                </Button>
+                </ButtonForName>
               );
             })}
           </AnimatedContainer>
