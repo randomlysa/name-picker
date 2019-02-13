@@ -8,7 +8,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Saved from './Containers/saved';
 import Filters from './Containers/filters';
@@ -81,16 +81,21 @@ class App extends React.Component {
     if (!max) max = 10;
     if (letters.length === 0) letters = ['_____'];
 
-    const results = axios.get(
-      `http://${devServer}/search/${min}/${max}/${letters}`
-    );
-    results.then(r => {
-      if (r.data.length === 0) {
-        this.setState({ errorMessage: "Sorry, we couldn't find that!!!" });
-        return;
+    // https://github.com/webpack/webpack/issues/8656
+    import(/* webpackChunkName: "axios" */ 'axios').then(
+      ({ default: axios }) => {
+        const results = axios.get(
+          `http://${prodServer}/search/${min}/${max}/${letters}`
+        );
+        results.then(r => {
+          if (r.data.length === 0) {
+            this.setState({ errorMessage: "Sorry, we couldn't find that!!!" });
+            return;
+          }
+          this.setState({ results: r.data });
+        });
       }
-      this.setState({ results: r.data });
-    });
+    );
   };
 
   saveToStorage = saved => {
