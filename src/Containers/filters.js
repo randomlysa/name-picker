@@ -51,6 +51,11 @@ const StyledInput = styled.input`
   margin: 0.3em;
   width: 80%;
 
+  /* Fix for smaller screens in portrait, like iphone 5/SE */
+  @media screen and (max-height: 320px) {
+    width: 30%;
+  }
+
   background: none;
   border: solid 1px;
   border-radius: 10px;
